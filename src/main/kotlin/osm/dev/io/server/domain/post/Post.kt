@@ -1,5 +1,6 @@
 package osm.dev.io.server.domain.post
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EntityListeners
@@ -34,4 +35,7 @@ class Post(
 
     @LastModifiedDate
     var updatedAt: LocalDateTime? = null
+
+    @Column(nullable = false)
+    var isPublished: Boolean = false
 }
