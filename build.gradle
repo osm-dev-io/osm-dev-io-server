@@ -9,6 +9,8 @@ plugins {
 group = 'osm.dev.io'
 version = '0.0.1-SNAPSHOT'
 
+ext['hibernate.version'] = '7.3.0.Final'
+
 java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(21)
