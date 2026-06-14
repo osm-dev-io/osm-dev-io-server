@@ -1,4 +1,4 @@
-package osm.dev.io.server.domain.post
+package osm.dev.io.server.domain.user
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -7,8 +7,6 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
-import org.hibernate.annotations.JdbcTypeCode
-import org.hibernate.type.SqlTypes
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -16,14 +14,10 @@ import java.time.LocalDateTime
 
 @EntityListeners(AuditingEntityListener::class)
 @Entity
-@Table(name = "posts")
-class Post(
-    @Column(nullable = false)
-    var title: String,
-
-    @JdbcTypeCode(SqlTypes.JSON)
-    @Column(nullable = false, columnDefinition = "jsonb")
-    var content: Map<String, Any>
+@Table(name = "users")
+class User(
+    @Column(nullable = false, unique = true)
+    var email: String
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +29,4 @@ class Post(
 
     @LastModifiedDate
     var updatedAt: LocalDateTime? = null
-
-    @Column(nullable = false)
-    var isPublished: Boolean = false
 }
