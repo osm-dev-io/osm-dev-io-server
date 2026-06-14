@@ -8,7 +8,7 @@ import osm.dev.io.server.domain.post.repository.PostRepository
 class PostService(
     private val postRepository: PostRepository
 ) {
-    fun createPost(title: String, content: String) {
+    fun createPost(title: String, content: Map<String, Any>) {
         val newPost = Post(title, content)
         postRepository.save(newPost)
     }
