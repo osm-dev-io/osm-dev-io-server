@@ -12,4 +12,8 @@ class PostService(
         val newPost = Post(title, content)
         postRepository.save(newPost)
     }
+
+    fun getPosts(): List<Post> {
+        return postRepository.findAll()
+    }
 }
