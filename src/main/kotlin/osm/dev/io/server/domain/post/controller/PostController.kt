@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 import osm.dev.io.server.domain.post.Post
 import osm.dev.io.server.domain.post.controller.dto.CreatePostRequest
 import osm.dev.io.server.domain.post.service.PostService
+import osm.dev.io.server.lib.ApiResponse
 
 @CrossOrigin(origins = ["http://localhost:3000"])
 @RestController
@@ -19,12 +20,14 @@ class PostController(
     @PostMapping
     fun createPost(
         @RequestBody request: CreatePostRequest
-    ) {
+    ): ApiResponse<Nothing> {
         postService.createPost(request.title, request.content)
+        return ApiResponse.success()
     }
 
     @GetMapping
-    fun getPosts(): List<Post> {
-        return postService.getPosts()
+    fun getPosts(): ApiResponse<List<Post>> {
+        val posts = postService.getPosts()
+        return ApiResponse.success(posts)
     }
 }
