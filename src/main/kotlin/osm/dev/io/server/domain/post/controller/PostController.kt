@@ -10,6 +10,7 @@ import osm.dev.io.server.domain.post.Post
 import osm.dev.io.server.domain.post.controller.dto.CreatePostRequest
 import osm.dev.io.server.domain.post.service.PostService
 import osm.dev.io.server.lib.ApiResponse
+import osm.dev.io.server.lib.auth.AdminOnly
 
 @CrossOrigin(origins = ["http://localhost:3000"])
 @RestController
@@ -17,6 +18,7 @@ import osm.dev.io.server.lib.ApiResponse
 class PostController(
     private val postService: PostService
 ) {
+    @AdminOnly
     @PostMapping
     fun createPost(
         @RequestBody request: CreatePostRequest
