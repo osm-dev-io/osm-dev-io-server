@@ -1,6 +1,5 @@
 package osm.dev.io.server.domain.post.controller
 
-import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -9,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController
 import osm.dev.io.server.domain.post.Post
 import osm.dev.io.server.domain.post.controller.dto.CreatePostRequest
 import osm.dev.io.server.domain.post.service.PostService
-import osm.dev.io.server.lib.ApiResponse
+import osm.dev.io.server.common.ApiResponse
 
 @RestController
 @RequestMapping("posts")

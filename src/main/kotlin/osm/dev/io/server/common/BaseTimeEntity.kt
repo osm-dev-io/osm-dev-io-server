@@ -1,4 +1,4 @@
-package osm.dev.io.server.lib
+package osm.dev.io.server.common
 
 import jakarta.persistence.Column
 import jakarta.persistence.EntityListeners

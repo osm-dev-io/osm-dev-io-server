@@ -8,7 +8,7 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
-import osm.dev.io.server.lib.BaseTimeEntity
+import osm.dev.io.server.common.BaseTimeEntity
 
 @Entity
 @Table(name = "users")

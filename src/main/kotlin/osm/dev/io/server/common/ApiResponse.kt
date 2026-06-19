@@ -1,4 +1,4 @@
-package osm.dev.io.server.lib
+package osm.dev.io.server.common
 
 data class ApiResponse<out T> private constructor (
     val success: Boolean,
