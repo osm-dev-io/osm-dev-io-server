@@ -11,7 +11,6 @@ import osm.dev.io.server.domain.post.controller.dto.CreatePostRequest
 import osm.dev.io.server.domain.post.service.PostService
 import osm.dev.io.server.lib.ApiResponse
 
-@CrossOrigin(origins = ["http://localhost:3000"])
 @RestController
 @RequestMapping("posts")
 class PostController(
