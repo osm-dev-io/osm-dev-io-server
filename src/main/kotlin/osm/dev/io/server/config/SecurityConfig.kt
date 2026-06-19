@@ -7,12 +7,18 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository
+import org.springframework.security.web.context.SecurityContextRepository
 
 @Configuration
 class SecurityConfig {
 
     @Bean
     fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
+
+    @Bean
+    fun securityContextRepository(): SecurityContextRepository =
+        HttpSessionSecurityContextRepository()
 
     @Bean
     fun securityFilterChan(http: HttpSecurity): SecurityFilterChain {
