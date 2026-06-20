@@ -1,5 +1,7 @@
 package osm.dev.io.server.domain.user.controller
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -19,5 +21,12 @@ class UserController(
     ): ApiResponse<Nothing> {
         userService.signup(request.email, request.password)
         return ApiResponse.success()
+    }
+
+    @GetMapping("/me")
+    fun myInfo(
+        @AuthenticationPrincipal email: String
+    ): ApiResponse<String> {
+        return ApiResponse.success(email)
     }
 }
