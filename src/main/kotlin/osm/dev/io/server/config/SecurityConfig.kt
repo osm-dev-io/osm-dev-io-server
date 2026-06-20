@@ -26,6 +26,7 @@ class SecurityConfig {
             .csrf { it.disable() }
             .formLogin { it.disable() }
             .httpBasic { it.disable() }
+            .logout { it.disable() }
             .cors {  }
             .authorizeHttpRequests {
                 it.requestMatchers("/users/signup", "/login").permitAll()
