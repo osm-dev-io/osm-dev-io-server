@@ -37,4 +37,13 @@ class AuthController(
 
         return ApiResponse.success()
     }
+
+    @PostMapping("logout")
+    fun logout(httpRequest: HttpServletRequest): ApiResponse<Nothing> {
+        httpRequest.getSession(false)?.invalidate()
+
+        SecurityContextHolder.clearContext()
+
+        return ApiResponse.success()
+    }
 }
