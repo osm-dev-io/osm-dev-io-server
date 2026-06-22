@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import osm.dev.io.server.common.ApiResponse
+import osm.dev.io.server.domain.user.LoginUser
 import osm.dev.io.server.domain.user.controller.dto.LoginRequest
 import osm.dev.io.server.domain.user.service.AuthService
 
@@ -25,9 +26,11 @@ class AuthController(
         httpResponse: HttpServletResponse
     ): ApiResponse<Nothing> {
         val user = authService.authenticate(request.email, request.password)
+        val userId = user.id ?: error("유저 ID 불러오기 실패")
 
         val authorities = listOf(SimpleGrantedAuthority("ROLE_${user.role.name}"))
-        val authentication = UsernamePasswordAuthenticationToken(user.email, null, authorities)
+        val principal = LoginUser(userId, user.email, user.role)
+        val authentication = UsernamePasswordAuthenticationToken(principal, null, authorities)
 
         val context = SecurityContextHolder.createEmptyContext()
         context.authentication = authentication

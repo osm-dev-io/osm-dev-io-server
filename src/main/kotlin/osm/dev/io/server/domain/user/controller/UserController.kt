@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import osm.dev.io.server.common.ApiResponse
+import osm.dev.io.server.domain.user.LoginUser
 import osm.dev.io.server.domain.user.controller.dto.SignupRequest
 import osm.dev.io.server.domain.user.service.UserService
 
@@ -25,8 +26,8 @@ class UserController(
 
     @GetMapping("/me")
     fun myInfo(
-        @AuthenticationPrincipal email: String
-    ): ApiResponse<String> {
-        return ApiResponse.success(email)
+        @AuthenticationPrincipal user: LoginUser
+    ): ApiResponse<LoginUser> {
+        return ApiResponse.success(user)
     }
 }
