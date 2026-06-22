@@ -9,9 +9,14 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository
 import org.springframework.security.web.context.SecurityContextRepository
+import osm.dev.io.server.common.exception.RestAccessDeniedHandler
+import osm.dev.io.server.common.exception.RestAuthenticationEntryPoint
 
 @Configuration
-class SecurityConfig {
+class SecurityConfig(
+    private val authenticationEntryPoint: RestAuthenticationEntryPoint,
+    private val accessDeniedHandler: RestAccessDeniedHandler
+) {
 
     @Bean
     fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
@@ -21,7 +26,9 @@ class SecurityConfig {
         HttpSessionSecurityContextRepository()
 
     @Bean
-    fun securityFilterChan(http: HttpSecurity): SecurityFilterChain {
+    fun securityFilterChain(
+        http: HttpSecurity,
+    ): SecurityFilterChain {
         http
             .csrf { it.disable() }
             .formLogin { it.disable() }
@@ -32,6 +39,10 @@ class SecurityConfig {
                 it.requestMatchers("/users/signup", "/login").permitAll()
                 it.requestMatchers(HttpMethod.GET, "/posts/**").permitAll()
                 it.anyRequest().authenticated()
+            }
+            .exceptionHandling {
+                it.authenticationEntryPoint(authenticationEntryPoint)
+                it.accessDeniedHandler(accessDeniedHandler)
             }
         return http.build()
     }
